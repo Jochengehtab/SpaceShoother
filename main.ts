@@ -15,6 +15,18 @@ function shoot () {
     }
 }
 input.onButtonPressed(Button.AB, function () {
+    index32 += 1
+    if (index32 == 2) {
+        basic.showLeds(`
+            # # # # #
+            # # # # #
+            # # # # #
+            # # # # #
+            # # # # #
+            `)
+        index32 = 0
+        return
+    }
     shoot()
 })
 input.onButtonPressed(Button.B, function () {
@@ -32,8 +44,10 @@ function setEnemyPosition (randomNumber: number) {
 }
 let randomNumber = 0
 let enemy: game.LedSprite = null
+let index32 = 0
 let bullet: game.LedSprite = null
 let player: game.LedSprite = null
+let index33 = 0
 player = game.createSprite(2, 4)
 basic.forever(function () {
     if (enemy == null) {
