@@ -15,7 +15,7 @@ function shoot () {
     }
 }
 input.onButtonPressed(Button.AB, function () {
-    count += 1
+    count = count + 1
     if (count == 2) {
         basic.showLeds(`
             . . . . #
@@ -24,8 +24,6 @@ input.onButtonPressed(Button.AB, function () {
             . # . . .
             . . . . .
             `)
-        count = 0
-        return
     }
     shoot()
     basic.pause(100)
