@@ -15,14 +15,10 @@ function shoot () {
     }
 }
 input.onButtonPressed(Button.AB, function () {
-    count += 1
     basic.pause(100)
-    if (!(input.buttonIsPressed(Button.AB))) {
-        shoot()
-        return
-    }
-    serial.writeLine("" + (count))
-    if (count == 2) {
+    if (input.buttonIsPressed(Button.AB)) {
+        let count = 0
+        serial.writeLine("" + (count))
         basic.showLeds(`
             . . . # #
             . . . # .
@@ -30,8 +26,9 @@ input.onButtonPressed(Button.AB, function () {
             . # . . .
             . . . . .
             `)
-        count = 0
     }
+    return
+shoot()
 })
 input.onButtonPressed(Button.B, function () {
     player.change(LedSpriteProperty.X, 1)
@@ -48,26 +45,10 @@ function setEnemyPosition (randomNumber: number) {
 }
 let randomNumber2 = 0
 let enemy: game.LedSprite = null
-let count = 0
 let bullet: game.LedSprite = null
 let player: game.LedSprite = null
 player = game.createSprite(2, 4)
 serial.writeLine("Start Log for Game 'Space Shoother'")
-basic.forever(function () {
-    if (enemy == null) {
-        return
-    } else if (bullet == null) {
-        return
-    }
-    if (bullet.isTouching(enemy)) {
-        bullet.delete()
-        enemy.delete()
-    }
-})
-basic.forever(function () {
-    randomNumber2 = randint(0, 4)
-    setEnemyPosition(randomNumber2)
-})
 basic.forever(function () {
     if (enemy == null) {
         return
@@ -83,4 +64,19 @@ basic.forever(function () {
     if (bullet.get(LedSpriteProperty.Y) == 0) {
         bullet.delete()
     }
+})
+basic.forever(function () {
+    if (enemy == null) {
+        return
+    } else if (bullet == null) {
+        return
+    }
+    if (bullet.isTouching(enemy)) {
+        bullet.delete()
+        enemy.delete()
+    }
+})
+basic.forever(function () {
+    randomNumber2 = randint(0, 4)
+    setEnemyPosition(randomNumber2)
 })
