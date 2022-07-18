@@ -1,6 +1,9 @@
 input.onButtonPressed(Button.A, function () {
     player.change(LedSpriteProperty.X, -1)
 })
+function showSuperAttackAnimations () {
+	
+}
 function moveEnemy (sprite: game.LedSprite) {
     for (let index = 0; index < 4; index++) {
         sprite.change(LedSpriteProperty.Y, 1)
@@ -31,6 +34,23 @@ function superAttack () {
         # # # # #
         # # # # #
         `)
+    basic.pause(50)
+    basic.showLeds(`
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        . . . . .
+        `)
+    basic.pause(50)
+    basic.showLeds(`
+        # # # # #
+        # # # # #
+        # # # # #
+        . . . . .
+        . . . . .
+        `)
+    basic.pause(50)
 }
 input.onButtonPressed(Button.AB, function () {
     basic.pause(100)
@@ -56,8 +76,8 @@ function setEnemyPosition (randomNumber: number) {
 }
 let randomNumber2 = 0
 let enemy: game.LedSprite = null
-let player: game.LedSprite = null
 let bullet: game.LedSprite = null
+let player: game.LedSprite = null
 player = game.createSprite(2, 4)
 serial.writeLine("Start Log for Game 'Space Shoother'")
 basic.forever(function () {
