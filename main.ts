@@ -16,6 +16,7 @@ function shoot () {
 }
 function addNumberToCount () {
     count = count + 1
+    serial.writeLine("" + count + ".")
 }
 input.onButtonPressed(Button.AB, function () {
     addNumberToCount()
