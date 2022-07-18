@@ -15,18 +15,28 @@ function shoot () {
 basic.pause(100)
     }
 }
+function superAttack () {
+    if (bullet == null) {
+        return
+    }
+    if (enemy == null) {
+        return
+    }
+    bullet.delete()
+    enemy.delete()
+    basic.showLeds(`
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        `)
+}
 input.onButtonPressed(Button.AB, function () {
     basic.pause(100)
     if (input.buttonIsPressed(Button.AB)) {
         let count = 0
         serial.writeLine("" + (count))
-        basic.showLeds(`
-            . . . # #
-            . . . # .
-            # # # . .
-            . # . . .
-            . . . . .
-            `)
         return
     } else {
         shoot()
@@ -54,6 +64,21 @@ serial.writeLine("Start Log for Game 'Space Shoother'")
 basic.forever(function () {
     if (enemy == null) {
         return
+    } else if (bullet == null) {
+        return
+    }
+    if (bullet.isTouching(enemy)) {
+        bullet.delete()
+        enemy.delete()
+    }
+})
+basic.forever(function () {
+    randomNumber2 = randint(0, 4)
+    setEnemyPosition(randomNumber2)
+})
+basic.forever(function () {
+    if (enemy == null) {
+        return
     }
     if (enemy.get(LedSpriteProperty.Y) == 4) {
         enemy.delete()
@@ -66,19 +91,4 @@ basic.forever(function () {
     if (bullet.get(LedSpriteProperty.Y) == 0) {
         bullet.delete()
     }
-})
-basic.forever(function () {
-    if (enemy == null) {
-        return
-    } else if (bullet == null) {
-        return
-    }
-    if (bullet.isTouching(enemy)) {
-        bullet.delete()
-        enemy.delete()
-    }
-})
-basic.forever(function () {
-    randomNumber2 = randint(0, 4)
-    setEnemyPosition(randomNumber2)
 })
