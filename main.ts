@@ -35,8 +35,7 @@ function superAttack () {
 input.onButtonPressed(Button.AB, function () {
     basic.pause(100)
     if (input.buttonIsPressed(Button.AB)) {
-        let count = 0
-        serial.writeLine("" + (count))
+        superAttack()
         return
     } else {
         shoot()
