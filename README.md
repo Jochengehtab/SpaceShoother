@@ -2,6 +2,7 @@
 > Diese Seite bei [https://jochengehtab.github.io/spaceshoother/](https://jochengehtab.github.io/spaceshoother/) öffnen
 
 ## Als Erweiterung verwenden
+## Author: Jochengehtab
 
 Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
