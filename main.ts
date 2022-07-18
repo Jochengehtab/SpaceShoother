@@ -14,25 +14,24 @@ function shoot () {
         basic.pause(100)
     }
 }
-function addNumberToCount () {
-    count = count + 1
-    serial.writeLine("" + count + ".")
-}
 input.onButtonPressed(Button.AB, function () {
-    addNumberToCount()
+    count += 1
+    basic.pause(100)
+    if (!(input.buttonIsPressed(Button.AB))) {
+        shoot()
+        return
+    }
     serial.writeLine("" + (count))
     if (count == 2) {
         basic.showLeds(`
-            . . . . #
+            . . . # #
             . . . # .
-            # . # . .
+            # # # . .
             . # . . .
             . . . . .
             `)
+        count = 0
     }
-    shoot()
-    basic.pause(100)
-    count = 0
 })
 input.onButtonPressed(Button.B, function () {
     player.change(LedSpriteProperty.X, 1)
@@ -53,7 +52,7 @@ let count = 0
 let bullet: game.LedSprite = null
 let player: game.LedSprite = null
 player = game.createSprite(2, 4)
-serial.writeLine("Start Log for Game ‚Space Shoother'")
+serial.writeLine("Start Log for Game 'Space Shoother'")
 basic.forever(function () {
     if (enemy == null) {
         return
