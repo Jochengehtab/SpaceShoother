@@ -1,3 +1,33 @@
+function macheEtwas () {
+    basic.showLeds(`
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        `)
+    basic.showLeds(`
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        . . . . .
+        `)
+    basic.showLeds(`
+        . # # # #
+        . # # # #
+        . # # # #
+        . # # # #
+        . . . . .
+        `)
+    basic.showLeds(`
+        . . . . .
+        . # # # #
+        . # # # #
+        . # # # #
+        . . . . .
+        `)
+}
 input.onButtonPressed(Button.A, function () {
     player.change(LedSpriteProperty.X, -1)
 })
@@ -27,30 +57,7 @@ function superAttack () {
     }
     bullet.delete()
     enemy.delete()
-    basic.showLeds(`
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        `)
-    basic.pause(50)
-    basic.showLeds(`
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        . . . . .
-        `)
-    basic.pause(50)
-    basic.showLeds(`
-        # # # # #
-        # # # # #
-        # # # # #
-        . . . . .
-        . . . . .
-        `)
-    basic.pause(50)
+    macheEtwas()
 }
 input.onButtonPressed(Button.AB, function () {
     basic.pause(100)
@@ -92,16 +99,16 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-    randomNumber2 = randint(0, 4)
-    setEnemyPosition(randomNumber2)
-})
-basic.forever(function () {
     if (enemy == null) {
         return
     }
     if (enemy.get(LedSpriteProperty.Y) == 4) {
         enemy.delete()
     }
+})
+basic.forever(function () {
+    randomNumber2 = randint(0, 4)
+    setEnemyPosition(randomNumber2)
 })
 basic.forever(function () {
     if (bullet == null) {
