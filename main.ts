@@ -42,7 +42,7 @@ function moveEnemy (sprite: game.LedSprite) {
 }
 function shoot () {
     bullet = game.createSprite(player.get(LedSpriteProperty.X), player.get(LedSpriteProperty.Y))
-    music.playMelody("C5 B A G F F F F ", 1000)
+    music.playMelody("C5 B A G F F F F ", 5000)
     for (let index = 0; index < 4; index++) {
         bullet.change(LedSpriteProperty.Y, -1)
         bullet.setBrightness(80)
