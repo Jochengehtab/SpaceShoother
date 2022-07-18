@@ -26,9 +26,10 @@ input.onButtonPressed(Button.AB, function () {
             . # . . .
             . . . . .
             `)
+        return
+    } else {
+        shoot()
     }
-    return
-shoot()
 })
 input.onButtonPressed(Button.B, function () {
     player.change(LedSpriteProperty.X, 1)
@@ -52,6 +53,21 @@ serial.writeLine("Start Log for Game 'Space Shoother'")
 basic.forever(function () {
     if (enemy == null) {
         return
+    } else if (bullet == null) {
+        return
+    }
+    if (bullet.isTouching(enemy)) {
+        bullet.delete()
+        enemy.delete()
+    }
+})
+basic.forever(function () {
+    randomNumber2 = randint(0, 4)
+    setEnemyPosition(randomNumber2)
+})
+basic.forever(function () {
+    if (enemy == null) {
+        return
     }
     if (enemy.get(LedSpriteProperty.Y) == 4) {
         enemy.delete()
@@ -64,19 +80,4 @@ basic.forever(function () {
     if (bullet.get(LedSpriteProperty.Y) == 0) {
         bullet.delete()
     }
-})
-basic.forever(function () {
-    if (enemy == null) {
-        return
-    } else if (bullet == null) {
-        return
-    }
-    if (bullet.isTouching(enemy)) {
-        bullet.delete()
-        enemy.delete()
-    }
-})
-basic.forever(function () {
-    randomNumber2 = randint(0, 4)
-    setEnemyPosition(randomNumber2)
 })
