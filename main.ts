@@ -33,6 +33,7 @@ function showSuperAttackAnimations () {
         . . . . .
         `)
     game.resume()
+    basic.pause(500)
     isSuperAttackIsRunning = false
 }
 function moveEnemy (sprite: game.LedSprite) {
@@ -42,6 +43,9 @@ function moveEnemy (sprite: game.LedSprite) {
     }
 }
 function shoot () {
+    if (shootColdown == true) {
+        return
+    }
     bullet = game.createSprite(player.get(LedSpriteProperty.X), player.get(LedSpriteProperty.Y))
     music.playMelody("C5 B A G F F F F ", 5000)
     for (let index = 0; index < 4; index++) {
@@ -62,9 +66,8 @@ function superAttack () {
 }
 // Input for Button 'AB'
 input.onButtonPressed(Button.AB, function () {
-    basic.pause(100)
+    shootColdown = true
     if (input.buttonIsPressed(Button.AB)) {
-        isSuperAttackIsRunning = true
         superAttack()
         showSuperAttackAnimations()
         return
@@ -88,6 +91,7 @@ function setEnemyPosition (randomNumber: number) {
 }
 let randomNumberForEnemyPosition = 0
 let enemy: game.LedSprite = null
+let shootColdown = false
 let isSuperAttackIsRunning = false
 let player: game.LedSprite = null
 let bullet: game.LedSprite = null
@@ -98,10 +102,23 @@ serial.writeLine("Start Log for Game 'Space Shoother'")
 basic.forever(function () {
     if (enemy == null) {
         return
+    } else if (bullet == null) {
+        return
+    }
+    if (bullet.isTouching(enemy)) {
+        bullet.delete()
+        enemy.delete()
+        music.playMelody("C C D C C C D C ", 4500)
+    }
+})
+basic.forever(function () {
+    if (enemy == null) {
+        return
     }
     if (enemy.get(LedSpriteProperty.Y) == 4) {
         enemy.delete()
         music.playMelody("C C C F E D C C ", 6000)
+        shootColdown = false
     }
 })
 // Forever function for spawning Enemys with a random Position
@@ -123,17 +140,5 @@ basic.forever(function () {
     }
     if (!(bullet == null)) {
         bullet.delete()
-    }
-})
-basic.forever(function () {
-    if (enemy == null) {
-        return
-    } else if (bullet == null) {
-        return
-    }
-    if (bullet.isTouching(enemy)) {
-        bullet.delete()
-        enemy.delete()
-        music.playMelody("C C D C C C D C ", 4500)
     }
 })
