@@ -3,77 +3,73 @@ input.onButtonPressed(Button.A, function () {
 })
 function showSuperAttackAnimations () {
     game.pause()
-    basic.showLeds(`
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        `)
-    basic.showLeds(`
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        . . . . .
-        `)
-    basic.showLeds(`
-        . # # # #
-        . # # # #
-        . # # # #
-        . # # # #
-        . . . . .
-        `)
-    basic.showLeds(`
-        . . . . .
-        . # # # #
-        . # # # #
-        . # # # #
-        . . . . .
-        `)
-    basic.showLeds(`
-        . . . . .
-        . # # # .
-        . # # # .
-        . # # # .
-        . . . . .
-        `)
-    basic.showLeds(`
-        . . . . .
-        . # # # .
-        . # # # .
-        . . . . .
-        . . . . .
-        `)
-    basic.showLeds(`
-        . . . . .
-        . . # # .
-        . . # # .
-        . . . . .
-        . . . . .
-        `)
-    basic.showLeds(`
-        . . . . .
-        . . . . .
-        . . # # .
-        . . . . .
-        . . . . .
-        `)
-    basic.showLeds(`
-        . . . . .
-        . . . . .
-        . . # . .
-        . . . . .
-        . . . . .
-        `)
-    basic.showLeds(`
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        `)
-    game.resume()
+    while (true) {
+        basic.showLeds(`
+            . . . . .
+            . . . . .
+            . . . . .
+            . . # . .
+            . . . . .
+            `)
+        basic.showLeds(`
+            . . . . .
+            . . . . .
+            . # # # .
+            . . # . .
+            . . . . .
+            `)
+        basic.showLeds(`
+            . . . . .
+            # . . . #
+            . # # # .
+            . . # . .
+            . . . . .
+            `)
+        basic.showLeds(`
+            . . . . .
+            # # # # #
+            . # # # .
+            . . # . .
+            . . . . .
+            `)
+        basic.showLeds(`
+            # . . . #
+            # # # # #
+            . # # # .
+            . . # . .
+            . . . . .
+            `)
+        basic.showLeds(`
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            `)
+        basic.showLeds(`
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            `)
+        basic.showLeds(`
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            `)
+        basic.showLeds(`
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            `)
+        game.resume()
+        break;
+    }
 }
 function moveEnemy (sprite: game.LedSprite) {
     for (let index = 0; index < 4; index++) {
@@ -130,14 +126,6 @@ let bullet: game.LedSprite = null
 player = game.createSprite(2, 4)
 serial.writeLine("Start Log for Game 'Space Shoother'")
 basic.forever(function () {
-    if (bullet == null) {
-        return
-    }
-    if (bullet.get(LedSpriteProperty.Y) == 0) {
-        bullet.delete()
-    }
-})
-basic.forever(function () {
     if (enemy == null) {
         return
     } else if (bullet == null) {
@@ -161,4 +149,12 @@ basic.forever(function () {
 basic.forever(function () {
     randomNumberForEnemyPosition = randint(0, 4)
     setEnemyPosition(randomNumberForEnemyPosition)
+})
+basic.forever(function () {
+    if (bullet == null) {
+        return
+    }
+    if (bullet.get(LedSpriteProperty.Y) == 0) {
+        bullet.delete()
+    }
 })
