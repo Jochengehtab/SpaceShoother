@@ -10,7 +10,6 @@ function showSuperAttackAnimations () {
         # # # # #
         # # # # #
         `)
-    basic.pause(1)
     basic.showLeds(`
         # # # # #
         # # # # #
@@ -18,7 +17,6 @@ function showSuperAttackAnimations () {
         # # # # #
         . . . . .
         `)
-    basic.pause(1)
     basic.showLeds(`
         . # # # #
         . # # # #
@@ -26,7 +24,6 @@ function showSuperAttackAnimations () {
         . # # # #
         . . . . .
         `)
-    basic.pause(1)
     basic.showLeds(`
         . . . . .
         . # # # #
@@ -34,7 +31,6 @@ function showSuperAttackAnimations () {
         . # # # #
         . . . . .
         `)
-    basic.pause(1)
     basic.showLeds(`
         . . . . .
         . # # # .
@@ -42,7 +38,6 @@ function showSuperAttackAnimations () {
         . # # # .
         . . . . .
         `)
-    basic.pause(1)
     basic.showLeds(`
         . . . . .
         . # # # .
@@ -50,7 +45,6 @@ function showSuperAttackAnimations () {
         . . . . .
         . . . . .
         `)
-    basic.pause(1)
     basic.showLeds(`
         . . . . .
         . . # # .
@@ -58,7 +52,6 @@ function showSuperAttackAnimations () {
         . . . . .
         . . . . .
         `)
-    basic.pause(1)
     basic.showLeds(`
         . . . . .
         . . . . .
@@ -66,7 +59,6 @@ function showSuperAttackAnimations () {
         . . . . .
         . . . . .
         `)
-    basic.pause(1)
     basic.showLeds(`
         . . . . .
         . . . . .
@@ -74,7 +66,6 @@ function showSuperAttackAnimations () {
         . . . . .
         . . . . .
         `)
-    basic.pause(1)
     basic.showLeds(`
         . . . . .
         . . . . .
@@ -132,7 +123,7 @@ function setEnemyPosition (randomNumber: number) {
     enemy = game.createSprite(randomNumber, -1)
     moveEnemy(enemy)
 }
-let randomNumber2 = 0
+let randomNumberForEnemyPosition = 0
 let enemy: game.LedSprite = null
 let player: game.LedSprite = null
 let bullet: game.LedSprite = null
@@ -168,6 +159,6 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-    randomNumber2 = randint(0, 4)
-    setEnemyPosition(randomNumber2)
+    randomNumberForEnemyPosition = randint(0, 4)
+    setEnemyPosition(randomNumberForEnemyPosition)
 })
