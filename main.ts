@@ -43,9 +43,6 @@ function moveEnemy (sprite: game.LedSprite) {
     }
 }
 function shoot () {
-    if (shootColdown == true) {
-        return
-    }
     bullet = game.createSprite(player.get(LedSpriteProperty.X), player.get(LedSpriteProperty.Y))
     music.playMelody("C5 B A G F F F F ", 5000)
     for (let index = 0; index < 4; index++) {
@@ -66,7 +63,6 @@ function superAttack () {
 }
 // Input for Button 'AB'
 input.onButtonPressed(Button.AB, function () {
-    shootColdown = true
     if (input.buttonIsPressed(Button.AB)) {
         superAttack()
         showSuperAttackAnimations()
@@ -79,7 +75,7 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     player.change(LedSpriteProperty.X, 1)
 })
-function Move (toMoveSprite: game.LedSprite) {
+function move (toMoveSprite: game.LedSprite) {
     for (let index = 0; index < 4; index++) {
         toMoveSprite.change(LedSpriteProperty.Y, -1)
         basic.pause(100)
@@ -90,8 +86,8 @@ function setEnemyPosition (randomNumber: number) {
     moveEnemy(enemy)
 }
 let randomNumberForEnemyPosition = 0
-let enemy: game.LedSprite = null
 let shootColdown = false
+let enemy: game.LedSprite = null
 let isSuperAttackIsRunning = false
 let player: game.LedSprite = null
 let bullet: game.LedSprite = null
@@ -99,6 +95,22 @@ let bullet: game.LedSprite = null
 player = game.createSprite(2, 4)
 // Log
 serial.writeLine("Start Log for Game 'Space Shoother'")
+basic.forever(function () {
+    if (bullet == null) {
+        return
+    }
+    if (bullet.get(LedSpriteProperty.Y) == 0) {
+        bullet.delete()
+    }
+})
+basic.forever(function () {
+    if (isSuperAttackIsRunning == false) {
+        return
+    }
+    if (!(bullet == null)) {
+        bullet.delete()
+    }
+})
 basic.forever(function () {
     if (enemy == null) {
         return
@@ -125,20 +137,4 @@ basic.forever(function () {
 basic.forever(function () {
     randomNumberForEnemyPosition = randint(0, 4)
     setEnemyPosition(randomNumberForEnemyPosition)
-})
-basic.forever(function () {
-    if (bullet == null) {
-        return
-    }
-    if (bullet.get(LedSpriteProperty.Y) == 0) {
-        bullet.delete()
-    }
-})
-basic.forever(function () {
-    if (isSuperAttackIsRunning == false) {
-        return
-    }
-    if (!(bullet == null)) {
-        bullet.delete()
-    }
 })
