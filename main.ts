@@ -1,38 +1,88 @@
-function macheEtwas () {
-    basic.showLeds(`
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        `)
-    basic.showLeds(`
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        . . . . .
-        `)
-    basic.showLeds(`
-        . # # # #
-        . # # # #
-        . # # # #
-        . # # # #
-        . . . . .
-        `)
-    basic.showLeds(`
-        . . . . .
-        . # # # #
-        . # # # #
-        . # # # #
-        . . . . .
-        `)
-}
 input.onButtonPressed(Button.A, function () {
     player.change(LedSpriteProperty.X, -1)
 })
 function showSuperAttackAnimations () {
-	
+    game.pause()
+    basic.showLeds(`
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        `)
+    basic.pause(1)
+    basic.showLeds(`
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        . . . . .
+        `)
+    basic.pause(1)
+    basic.showLeds(`
+        . # # # #
+        . # # # #
+        . # # # #
+        . # # # #
+        . . . . .
+        `)
+    basic.pause(1)
+    basic.showLeds(`
+        . . . . .
+        . # # # #
+        . # # # #
+        . # # # #
+        . . . . .
+        `)
+    basic.pause(1)
+    basic.showLeds(`
+        . . . . .
+        . # # # .
+        . # # # .
+        . # # # .
+        . . . . .
+        `)
+    basic.pause(1)
+    basic.showLeds(`
+        . . . . .
+        . # # # .
+        . # # # .
+        . . . . .
+        . . . . .
+        `)
+    basic.pause(1)
+    basic.showLeds(`
+        . . . . .
+        . . # # .
+        . . # # .
+        . . . . .
+        . . . . .
+        `)
+    basic.pause(1)
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . # # .
+        . . . . .
+        . . . . .
+        `)
+    basic.pause(1)
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . # . .
+        . . . . .
+        . . . . .
+        `)
+    basic.pause(1)
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        `)
+    game.resume()
 }
 function moveEnemy (sprite: game.LedSprite) {
     for (let index = 0; index < 4; index++) {
@@ -58,12 +108,12 @@ function superAttack () {
     }
     bullet.delete()
     enemy.delete()
-    macheEtwas()
 }
 input.onButtonPressed(Button.AB, function () {
     basic.pause(100)
     if (input.buttonIsPressed(Button.AB)) {
         superAttack()
+        showSuperAttackAnimations()
         return
     } else {
         shoot()
@@ -114,6 +164,7 @@ basic.forever(function () {
     }
     if (enemy.get(LedSpriteProperty.Y) == 4) {
         enemy.delete()
+        music.playMelody("C C C F E D C C ", 6000)
     }
 })
 basic.forever(function () {
