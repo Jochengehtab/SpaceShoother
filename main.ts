@@ -84,10 +84,18 @@ function setEnemyPosition (randomNumber: number) {
 }
 let randomNumber2 = 0
 let enemy: game.LedSprite = null
-let bullet: game.LedSprite = null
 let player: game.LedSprite = null
+let bullet: game.LedSprite = null
 player = game.createSprite(2, 4)
 serial.writeLine("Start Log for Game 'Space Shoother'")
+basic.forever(function () {
+    if (bullet == null) {
+        return
+    }
+    if (bullet.get(LedSpriteProperty.Y) == 0) {
+        bullet.delete()
+    }
+})
 basic.forever(function () {
     if (enemy == null) {
         return
@@ -97,6 +105,7 @@ basic.forever(function () {
     if (bullet.isTouching(enemy)) {
         bullet.delete()
         enemy.delete()
+        music.playMelody("C C D C C C D C ", 4500)
     }
 })
 basic.forever(function () {
@@ -110,12 +119,4 @@ basic.forever(function () {
 basic.forever(function () {
     randomNumber2 = randint(0, 4)
     setEnemyPosition(randomNumber2)
-})
-basic.forever(function () {
-    if (bullet == null) {
-        return
-    }
-    if (bullet.get(LedSpriteProperty.Y) == 0) {
-        bullet.delete()
-    }
 })
