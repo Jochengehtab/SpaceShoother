@@ -119,21 +119,6 @@ health = 5
 player = game.createSprite(2, 4)
 // Startlog
 serial.writeLine("Start Log for Game 'Space Shoother'.")
-// Forever function for spawning Enemys with a random Position
-basic.forever(function () {
-    setEnemyPosition(randomNumberForEnemyPosition)
-    randomNumberForEnemyPosition = randint(0, 4)
-})
-// Forever function for deleting bullet
-basic.forever(function () {
-    if (bullet == null) {
-        return
-    }
-    if (bullet.get(LedSpriteProperty.Y) == 0) {
-        bullet.delete()
-        shootColdown = false
-    }
-})
 basic.forever(function () {
     if (enemy == null) {
         return
@@ -151,11 +136,32 @@ basic.forever(function () {
     if (enemy == null) {
         return
     }
+    if(enemy.isTouchingEdge() == false){
+        return
+    }
+    serial.writeLine("" + (enemy.get(LedSpriteProperty.Y)))
+    if (enemy.get(LedSpriteProperty.Y) < 4) {
+        return
+    }
     if (enemy.get(LedSpriteProperty.Y) == 4) {
-        serial.writeNumber(enemy.get(LedSpriteProperty.Y))
         enemy.delete()
         setHealth(health = health - 1)
         basic.showNumber(health)
+        shootColdown = false
+    }
+})
+// Forever function for spawning Enemys with a random Position
+basic.forever(function () {
+    setEnemyPosition(randomNumberForEnemyPosition)
+    randomNumberForEnemyPosition = randint(0, 4)
+})
+// Forever function for deleting bullet
+basic.forever(function () {
+    if (bullet == null) {
+        return
+    }
+    if (bullet.get(LedSpriteProperty.Y) == 0) {
+        bullet.delete()
         shootColdown = false
     }
 })
