@@ -142,8 +142,3 @@ basic.forever(function () {
         bullet.delete()
     }
 })
-basic.forever(function () {
-    if (!(bullet == null)) {
-        bullet.delete()
-    }
-})
