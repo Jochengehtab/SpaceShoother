@@ -78,17 +78,17 @@ input.onButtonPressed(Button.AB, function () {
             serial.writeLine("Cannot lauch Super Attack, because 'shootColwodown' is false")
             return
         }
+        shootColdown = true
         superAttack()
         showSuperAttackAnimations()
-        shootColdown = true
         return
     } else {
         if (shootColdown == true) {
             serial.writeLine("Cannot lauch Attack, because 'shootColwodown' is false")
             return
         }
-        shoot()
         shootColdown = true
+        shoot()
     }
 })
 // Input for Button 'B'
