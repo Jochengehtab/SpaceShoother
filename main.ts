@@ -54,6 +54,9 @@ function shoot () {
     }
     shootColdown = false
 }
+function setHealth (amount: number) {
+    health = amount
+}
 // Lunch the SuperAttack
 function superAttack () {
     if (bullet == null) {
@@ -109,6 +112,7 @@ let enemy: game.LedSprite = null
 let shootColdown = false
 let bullet: game.LedSprite = null
 let player: game.LedSprite = null
+let health = 0
 // Create Player
 player = game.createSprite(2, 4)
 // Log
@@ -116,9 +120,22 @@ serial.writeLine("Start Log for Game 'Space Shoother'.")
 basic.forever(function () {
     if (enemy == null) {
         return
+    } else if (bullet == null) {
+        return
+    }
+    if (bullet.isTouching(enemy)) {
+        bullet.delete()
+        enemy.delete()
+        music.playMelody("C C D C C C D C ", 4500)
+    }
+})
+basic.forever(function () {
+    if (enemy == null) {
+        return
     }
     if (enemy.get(LedSpriteProperty.Y) == 4) {
         enemy.delete()
+        setHealth(health--)
         shootColdown = false
     }
 })
@@ -134,17 +151,5 @@ basic.forever(function () {
     if (bullet.get(LedSpriteProperty.Y) == 0) {
         bullet.delete()
         shootColdown = false
-    }
-})
-basic.forever(function () {
-    if (enemy == null) {
-        return
-    } else if (bullet == null) {
-        return
-    }
-    if (bullet.isTouching(enemy)) {
-        bullet.delete()
-        enemy.delete()
-        music.playMelody("C C D C C C D C ", 4500)
     }
 })
