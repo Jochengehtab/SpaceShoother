@@ -15,26 +15,50 @@ function showSuperAttackAnimations () {
     basic.clearScreen()
     basic.showLeds(`
         . . . . .
+        . # . . .
+        . . # . .
+        . . . # .
+        . . . . .
+        `)
+    basic.clearScreen()
+    basic.showLeds(`
         . . . . .
         . # . # .
         . . # . .
+        . # . # .
         . . . . .
         `)
     basic.clearScreen()
     basic.showLeds(`
-        . . . . .
-        # # . # #
-        . # # # .
+        # . . . #
+        . # . # .
         . . # . .
-        . . . . .
+        . # . # .
+        # . . . #
+        `)
+    basic.clearScreen()
+    basic.showLeds(`
+        # . # . #
+        . # . # .
+        # . # . #
+        . # . # .
+        # . # . #
+        `)
+    basic.clearScreen()
+    basic.showLeds(`
+        # . # . #
+        . # # # .
+        # # # # #
+        . # # # .
+        # . # . #
         `)
     basic.clearScreen()
     basic.showLeds(`
         # # # # #
         # # # # #
-        . # # # .
-        . . # . .
-        . . . . .
+        # # # # #
+        # # # # #
+        # # # # #
         `)
     wait(300)
     game.resume()
