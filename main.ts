@@ -2,7 +2,7 @@
 input.onButtonPressed(Button.A, function () {
     player.change(LedSpriteProperty.X, -1)
 })
-//Animation for the Super Attack
+// Animation for the Super Attack
 function showSuperAttackAnimations () {
     game.pause()
     basic.showLeds(`
@@ -36,27 +36,25 @@ function showSuperAttackAnimations () {
     game.resume()
     basic.pause(500)
 }
-//Moves an Enemy
+// Moves an Enemy
 function moveEnemy (sprite: game.LedSprite) {
     for (let index = 0; index < 4; index++) {
         sprite.change(LedSpriteProperty.Y, 1)
         basic.pause(1000)
     }
 }
-//Change the Y - Coordinate of the bullet to simulate a shoot Animation
+// Change the Y - Coordinate of the bullet to simulate a shoot Animation
 function shoot () {
-    serial.writeLine("In function shoot()")
     bullet = game.createSprite(player.get(LedSpriteProperty.X), player.get(LedSpriteProperty.Y))
     // music.playMelody("C5 B A G F F F F ", 5000)
     for (let index = 0; index < 4; index++) {
         bullet.change(LedSpriteProperty.Y, -1)
         // bullet.setBrightness(80)
-        serial.writeLine("Is bullet deletet: " + bullet.isDeleted())
         basic.pause(100)
     }
     shootColdown = false
 }
-//Lunch the SuperAttack
+// Lunch the SuperAttack
 function superAttack () {
     if (bullet == null) {
         return
@@ -70,12 +68,11 @@ function superAttack () {
 }
 // Input for Button 'AB'
 input.onButtonPressed(Button.AB, function () {
-    // fehler in shoot()
-    serial.writeLine("" + (shootColdown))
     if (input.buttonIsPressed(Button.AB)) {
         if (shootColdown == true) {
             return
         }
+        serial.writeLine("Ready to launch the super Attack")
         superAttack()
         showSuperAttackAnimations()
         shootColdown = true
@@ -92,19 +89,18 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     player.change(LedSpriteProperty.X, 1)
 })
-//Moves a Sprite
+// Moves a Sprite
 function move (toMoveSprite: game.LedSprite) {
     for (let index = 0; index < 4; index++) {
         toMoveSprite.change(LedSpriteProperty.Y, -1)
         basic.pause(100)
     }
 }
-//Sets the Position of an Enemy
+// Sets the Position of an Enemy
 function setEnemyPosition (randomNumber: number) {
     enemy = game.createSprite(randomNumber, -1)
     moveEnemy(enemy)
 }
-//Create other values
 let randomNumberForEnemyPosition = 0
 let enemy: game.LedSprite = null
 let shootColdown = false
@@ -114,19 +110,6 @@ let player: game.LedSprite = null
 player = game.createSprite(2, 4)
 // Log
 serial.writeLine("Start Log for Game 'Space Shoother'")
-// Forever function for spawning Enemys with a random Position
-basic.forever(function () {
-    randomNumberForEnemyPosition = randint(0, 4)
-    setEnemyPosition(randomNumberForEnemyPosition)
-})
-basic.forever(function () {
-    if (bullet == null) {
-        return
-    }
-    if (bullet.get(LedSpriteProperty.Y) == 0) {
-        bullet.delete()
-    }
-})
 basic.forever(function () {
     if (enemy == null) {
         return
@@ -146,5 +129,18 @@ basic.forever(function () {
     if (enemy.get(LedSpriteProperty.Y) == 4) {
         enemy.delete()
         shootColdown = false
+    }
+})
+// Forever function for spawning Enemys with a random Position
+basic.forever(function () {
+    randomNumberForEnemyPosition = randint(0, 4)
+    setEnemyPosition(randomNumberForEnemyPosition)
+})
+basic.forever(function () {
+    if (bullet == null) {
+        return
+    }
+    if (bullet.get(LedSpriteProperty.Y) == 0) {
+        bullet.delete()
     }
 })
