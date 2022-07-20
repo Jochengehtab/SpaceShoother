@@ -142,5 +142,6 @@ basic.forever(function () {
     }
     if (bullet.get(LedSpriteProperty.Y) == 0) {
         bullet.delete()
+        shootColdown = false
     }
 })
