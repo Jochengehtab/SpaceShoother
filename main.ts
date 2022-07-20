@@ -54,6 +54,7 @@ function shoot () {
     }
     shootColdown = false
 }
+// Set the health
 function setHealth (amount: number) {
     health = amount
 }
@@ -113,10 +114,26 @@ let shootColdown = false
 let bullet: game.LedSprite = null
 let player: game.LedSprite = null
 let health = 0
+health = 5
 // Create Player
 player = game.createSprite(2, 4)
-// Log
+// Startlog
 serial.writeLine("Start Log for Game 'Space Shoother'.")
+// Forever function for spawning Enemys with a random Position
+basic.forever(function () {
+    setEnemyPosition(randomNumberForEnemyPosition)
+    randomNumberForEnemyPosition = randint(0, 4)
+})
+// Forever function for deleting bullet
+basic.forever(function () {
+    if (bullet == null) {
+        return
+    }
+    if (bullet.get(LedSpriteProperty.Y) == 0) {
+        bullet.delete()
+        shootColdown = false
+    }
+})
 basic.forever(function () {
     if (enemy == null) {
         return
@@ -129,27 +146,16 @@ basic.forever(function () {
         music.playMelody("C C D C C C D C ", 4500)
     }
 })
+// Delete enemy wenn his Y - Coordinate is '4'
 basic.forever(function () {
     if (enemy == null) {
         return
     }
     if (enemy.get(LedSpriteProperty.Y) == 4) {
+        serial.writeNumber(enemy.get(LedSpriteProperty.Y))
         enemy.delete()
-        setHealth(health--)
-        shootColdown = false
-    }
-})
-// Forever function for spawning Enemys with a random Position
-basic.forever(function () {
-    randomNumberForEnemyPosition = randint(0, 4)
-    setEnemyPosition(randomNumberForEnemyPosition)
-})
-basic.forever(function () {
-    if (bullet == null) {
-        return
-    }
-    if (bullet.get(LedSpriteProperty.Y) == 0) {
-        bullet.delete()
+        setHealth(health = health - 1)
+        basic.showNumber(health)
         shootColdown = false
     }
 })
