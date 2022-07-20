@@ -68,17 +68,20 @@ function superAttack () {
 }
 // Input for Button 'AB'
 input.onButtonPressed(Button.AB, function () {
+    basic.pause(100)
     if (input.buttonIsPressed(Button.AB)) {
+        serial.writeLine("Ready to launch the Super Attack")
         if (shootColdown == true) {
+            serial.writeLine("Cannot lauch Super Attack, because 'shootColwodown' is false")
             return
         }
-        serial.writeLine("Ready to launch the super Attack")
         superAttack()
         showSuperAttackAnimations()
         shootColdown = true
         return
     } else {
         if (shootColdown == true) {
+            serial.writeLine("Cannot lauch Attack, because 'shootColwodown' is false")
             return
         }
         shoot()
@@ -109,19 +112,7 @@ let player: game.LedSprite = null
 // Create Player
 player = game.createSprite(2, 4)
 // Log
-serial.writeLine("Start Log for Game 'Space Shoother'")
-basic.forever(function () {
-    if (enemy == null) {
-        return
-    } else if (bullet == null) {
-        return
-    }
-    if (bullet.isTouching(enemy)) {
-        bullet.delete()
-        enemy.delete()
-        music.playMelody("C C D C C C D C ", 4500)
-    }
-})
+serial.writeLine("Start Log for Game 'Space Shoother'.")
 basic.forever(function () {
     if (enemy == null) {
         return
@@ -143,5 +134,17 @@ basic.forever(function () {
     if (bullet.get(LedSpriteProperty.Y) == 0) {
         bullet.delete()
         shootColdown = false
+    }
+})
+basic.forever(function () {
+    if (enemy == null) {
+        return
+    } else if (bullet == null) {
+        return
+    }
+    if (bullet.isTouching(enemy)) {
+        bullet.delete()
+        enemy.delete()
+        music.playMelody("C C D C C C D C ", 4500)
     }
 })
