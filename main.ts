@@ -109,22 +109,13 @@ function setEnemyPosition (randomNumber: number) {
 }
 let randomNumberForEnemyPosition = 0
 let enemy: game.LedSprite = null
-let shootColdown = false
 let bullet: game.LedSprite = null
+let shootColdown = false
 let player: game.LedSprite = null
 // Create Player
 player = game.createSprite(2, 4)
 // Log
 serial.writeLine("Start Log for Game 'Space Shoother'.")
-basic.forever(function () {
-    if (enemy == null) {
-        return
-    }
-    if (enemy.get(LedSpriteProperty.Y) == 4) {
-        enemy.delete()
-        shootColdown = false
-    }
-})
 // Forever function for spawning Enemys with a random Position
 basic.forever(function () {
     randomNumberForEnemyPosition = randint(0, 4)
@@ -149,5 +140,14 @@ basic.forever(function () {
         bullet.delete()
         enemy.delete()
         music.playMelody("C C D C C C D C ", 4500)
+    }
+})
+basic.forever(function () {
+    if (enemy == null) {
+        return
+    }
+    if (enemy.get(LedSpriteProperty.Y) == 4) {
+        enemy.delete()
+        shootColdown = false
     }
 })
