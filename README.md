@@ -6,19 +6,11 @@
 
 Dieses Repository ist ein **Vollständiges** Spiel
 
-##Anleitung
-- öffne [https://makecode.microbit.org/](https://makecode.microbit.org/)
-- klicke auf **Neues Projekt**
-- klicke auf **Erweiterungen** unter dem Zahnrad-Menü
-- nach **https://github.com/jochengehtab/spaceshoother** suchen und importieren
-
-## Dieses Projekt bearbeiten ![Build Status Abzeichen](https://github.com/jochengehtab/spaceshoother/workflows/MakeCode/badge.svg)
-
-Um dieses Repository in MakeCode zu bearbeiten.
-
-* öffne [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* klicke auf **Importieren** und dann auf **Importiere URL**
-* füge **https://github.com/jochengehtab/spaceshoother** ein und klicke auf Importieren
+## Anleitung
+- Öffne [https://makecode.microbit.org/](https://makecode.microbit.org/)
+- Klicke auf **Neues Projekt**
+- Klicke auf **Erweiterungen** unter dem Zahnrad-Menü
+- Nach **https://github.com/jochengehtab/spaceshoother** suchen und dann dieses Repository importieren
 
 ## Blockvorschau
 
