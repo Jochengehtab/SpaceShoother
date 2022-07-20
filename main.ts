@@ -34,15 +34,19 @@ function showSuperAttackAnimations () {
         . . . . .
         `)
     game.resume()
-    basic.pause(500)
+    wait(500)
 }
 // Moves an Enemy
 function moveEnemy (sprite: game.LedSprite) {
     sprite.setBrightness(150)
 for (let index = 0; index < 4; index++) {
         sprite.change(LedSpriteProperty.Y, 1)
-        basic.pause(750)
+        wait(750)
     }
+}
+// Wait for a few miliseconds
+function wait (time: number) {
+    basic.pause(time)
 }
 // Change the Y - Coordinate of the bullet to simulate a shoot Animation
 function shoot () {
@@ -51,7 +55,7 @@ function shoot () {
     for (let index = 0; index < 4; index++) {
         bullet.change(LedSpriteProperty.Y, -1)
         bullet.setBrightness(80)
-basic.pause(100)
+wait(100)
     }
     shootColdown = false
 }
@@ -101,7 +105,7 @@ input.onButtonPressed(Button.B, function () {
 function move (toMoveSprite: game.LedSprite) {
     for (let index = 0; index < 4; index++) {
         toMoveSprite.change(LedSpriteProperty.Y, -1)
-        basic.pause(100)
+        wait(100)
     }
 }
 // Sets the Position of an Enemy
@@ -109,39 +113,18 @@ function setEnemyPosition (randomNumber: number) {
     enemy = game.createSprite(randomNumber, -1)
     moveEnemy(enemy)
 }
-let score = 0
 let randomNumberForEnemyPosition = 0
+let score = 0
 let enemy: game.LedSprite = null
 let shootColdown = false
 let player: game.LedSprite = null
-let health = 0
 let bullet: game.LedSprite = null
+let health = 0
 health = 5
 // Create Player
 player = game.createSprite(2, 4)
 // Startlog
 serial.writeLine("Start Log for Game 'Space Shoother'.")
-// Forever function for spawning Enemys with a random Position
-basic.forever(function () {
-    if (health == 0) {
-        return
-    }
-    setEnemyPosition(randomNumberForEnemyPosition)
-    randomNumberForEnemyPosition = randint(0, 4)
-})
-// Forever function for deleting 'bullet' when the Y - Coordinate is 0
-basic.forever(function () {
-    if (bullet == null) {
-        return
-    }
-    if (health == 0) {
-        return
-    }
-    if (bullet.get(LedSpriteProperty.Y) == 0) {
-        bullet.delete()
-        shootColdown = false
-    }
-})
 // Deleteing 'enemy' and 'bullet' when them touching herself
 basic.forever(function () {
     if (enemy == null) {
@@ -164,6 +147,10 @@ basic.forever(function () {
     if (health == 0) {
         game.pause()
         basic.showNumber(score)
+        wait(4500)
+        health = 5
+        score = 0
+        game.resume()
     }
 })
 // Delete 'enemy' wenn his Y - Coordinate is '4'
@@ -181,6 +168,27 @@ basic.forever(function () {
         enemy.delete()
         setHealth(health -= 1)
         basic.showNumber(health)
+        shootColdown = false
+    }
+})
+// Forever function for spawning Enemys with a random Position
+basic.forever(function () {
+    if (health == 0) {
+        return
+    }
+    setEnemyPosition(randomNumberForEnemyPosition)
+    randomNumberForEnemyPosition = randint(0, 4)
+})
+// Forever function for deleting 'bullet' when the Y - Coordinate is 0
+basic.forever(function () {
+    if (bullet == null) {
+        return
+    }
+    if (health == 0) {
+        return
+    }
+    if (bullet.get(LedSpriteProperty.Y) == 0) {
+        bullet.delete()
         shootColdown = false
     }
 })
