@@ -4,6 +4,7 @@ input.onButtonPressed(Button.A, function () {
 })
 // Animation for the Super Attack
 function showSuperAttackAnimations () {
+    shootColdown = true
     game.pause()
     basic.showLeds(`
         . . . . .
@@ -56,6 +57,7 @@ function shoot () {
 }
 // Lunch the SuperAttack
 function superAttack () {
+    shootColdown = true
     if (bullet == null) {
         return
     }
@@ -64,6 +66,7 @@ function superAttack () {
     }
     bullet.delete()
     enemy.delete()
+    basic.pause(100)
     shootColdown = false
 }
 // Input for Button 'AB'
