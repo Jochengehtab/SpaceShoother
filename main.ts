@@ -12,6 +12,7 @@ function showSuperAttackAnimations () {
         . . # . .
         . . . . .
         `)
+    basic.clearScreen()
     basic.showLeds(`
         . . . . .
         . . . . .
@@ -19,6 +20,7 @@ function showSuperAttackAnimations () {
         . . # . .
         . . . . .
         `)
+    basic.clearScreen()
     basic.showLeds(`
         . . . . .
         # # # # #
@@ -26,6 +28,7 @@ function showSuperAttackAnimations () {
         . . # . .
         . . . . .
         `)
+    basic.clearScreen()
     basic.showLeds(`
         # # # # #
         # # # # #
