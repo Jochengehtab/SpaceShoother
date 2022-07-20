@@ -47,7 +47,8 @@ function moveEnemy (sprite: game.LedSprite) {
 // Change the Y - Coordinate of the bullet to simulate a shoot Animation
 function shoot () {
     bullet = game.createSprite(player.get(LedSpriteProperty.X), player.get(LedSpriteProperty.Y))
-    // music.playMelody("C5 B A G F F F F ", 5000)
+    serial.writeLine("shootColdown is: " + shootColdown + ".")
+    music.playMelody("C5 B A G F F F F ", 5000)
     for (let index = 0; index < 4; index++) {
         bullet.change(LedSpriteProperty.Y, -1)
         // bullet.setBrightness(80)
@@ -66,7 +67,6 @@ function superAttack () {
     }
     bullet.delete()
     enemy.delete()
-    basic.pause(100)
     shootColdown = false
 }
 // Input for Button 'AB'
@@ -78,9 +78,9 @@ input.onButtonPressed(Button.AB, function () {
             serial.writeLine("Cannot lauch Super Attack, because 'shootColwodown' is false")
             return
         }
+        shootColdown = true
         superAttack()
         showSuperAttackAnimations()
-        shootColdown = true
         return
     } else {
         if (shootColdown == true) {
@@ -109,22 +109,13 @@ function setEnemyPosition (randomNumber: number) {
 }
 let randomNumberForEnemyPosition = 0
 let enemy: game.LedSprite = null
-let shootColdown = false
 let bullet: game.LedSprite = null
+let shootColdown = false
 let player: game.LedSprite = null
 // Create Player
 player = game.createSprite(2, 4)
 // Log
 serial.writeLine("Start Log for Game 'Space Shoother'.")
-basic.forever(function () {
-    if (enemy == null) {
-        return
-    }
-    if (enemy.get(LedSpriteProperty.Y) == 4) {
-        enemy.delete()
-        shootColdown = false
-    }
-})
 // Forever function for spawning Enemys with a random Position
 basic.forever(function () {
     randomNumberForEnemyPosition = randint(0, 4)
@@ -149,5 +140,14 @@ basic.forever(function () {
         bullet.delete()
         enemy.delete()
         music.playMelody("C C D C C C D C ", 4500)
+    }
+})
+basic.forever(function () {
+    if (enemy == null) {
+        return
+    }
+    if (enemy.get(LedSpriteProperty.Y) == 4) {
+        enemy.delete()
+        shootColdown = false
     }
 })
