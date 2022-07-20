@@ -78,6 +78,7 @@ function wait (time: number) {
 // Change the Y - Coordinate of the bullet to simulate a shoot Animation
 function shoot () {
     bullet = game.createSprite(player.get(LedSpriteProperty.X), player.get(LedSpriteProperty.Y))
+    music.playMelody("C C C F E D C C ", 6000)
     // music.playMelody("C5 B A G F F F F ", 5000)
     for (let index = 0; index < 4; index++) {
         bullet.change(LedSpriteProperty.Y, -1)
@@ -194,6 +195,7 @@ basic.forever(function () {
     if (enemy.get(LedSpriteProperty.Y) == 4) {
         enemy.delete()
         setHealth(health -= 1)
+        music.playMelody("C C C C C C C C ", 1200)
         basic.showNumber(health)
         shootColdown = false
     }
