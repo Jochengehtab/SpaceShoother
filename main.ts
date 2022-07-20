@@ -109,6 +109,7 @@ function setEnemyPosition (randomNumber: number) {
     enemy = game.createSprite(randomNumber, -1)
     moveEnemy(enemy)
 }
+let score = 0
 let randomNumberForEnemyPosition = 0
 let enemy: game.LedSprite = null
 let shootColdown = false
@@ -120,13 +121,52 @@ health = 5
 player = game.createSprite(2, 4)
 // Startlog
 serial.writeLine("Start Log for Game 'Space Shoother'.")
-// Check health
+// Forever function for spawning Enemys with a random Position
+basic.forever(function () {
+    if (health == 0) {
+        return
+    }
+    setEnemyPosition(randomNumberForEnemyPosition)
+    randomNumberForEnemyPosition = randint(0, 4)
+})
+// Forever function for deleting 'bullet' when the Y - Coordinate is 0
+basic.forever(function () {
+    if (bullet == null) {
+        return
+    }
+    if (health == 0) {
+        return
+    }
+    if (bullet.get(LedSpriteProperty.Y) == 0) {
+        bullet.delete()
+        shootColdown = false
+    }
+})
+// Deleteing 'enemy' and 'bullet' when them touching herself
+basic.forever(function () {
+    if (enemy == null) {
+        return
+    } else if (bullet == null) {
+        return
+    }
+    if (health == 0) {
+        return
+    }
+    if (bullet.isTouching(enemy)) {
+        bullet.delete()
+        enemy.delete()
+        score += 1
+        music.playMelody("C C D C C C D C ", 4500)
+    }
+})
+// Check, if 'health' is 0
 basic.forever(function () {
     if (health == 0) {
         game.pause()
+        basic.showNumber(score)
     }
 })
-// Delete enemy wenn his Y - Coordinate is '4'
+// Delete 'enemy' wenn his Y - Coordinate is '4'
 basic.forever(function () {
     if (enemy == null) {
         return
@@ -142,41 +182,5 @@ basic.forever(function () {
         setHealth(health -= 1)
         basic.showNumber(health)
         shootColdown = false
-    }
-})
-// Forever function for spawning Enemys with a random Position
-basic.forever(function () {
-    if (health == 0) {
-        return
-    }
-    setEnemyPosition(randomNumberForEnemyPosition)
-    randomNumberForEnemyPosition = randint(0, 4)
-})
-// Forever function for deleting bullet
-basic.forever(function () {
-    if (bullet == null) {
-        return
-    }
-    if (health == 0) {
-        return
-    }
-    if (bullet.get(LedSpriteProperty.Y) == 0) {
-        bullet.delete()
-        shootColdown = false
-    }
-})
-basic.forever(function () {
-    if (enemy == null) {
-        return
-    } else if (bullet == null) {
-        return
-    }
-    if (health == 0) {
-        return
-    }
-    if (bullet.isTouching(enemy)) {
-        bullet.delete()
-        enemy.delete()
-        music.playMelody("C C D C C C D C ", 4500)
     }
 })
