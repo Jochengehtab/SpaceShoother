@@ -38,9 +38,10 @@ function showSuperAttackAnimations () {
 }
 // Moves an Enemy
 function moveEnemy (sprite: game.LedSprite) {
-    for (let index = 0; index < 4; index++) {
+    sprite.setBrightness(150)
+for (let index = 0; index < 4; index++) {
         sprite.change(LedSpriteProperty.Y, 1)
-        basic.pause(1000)
+        basic.pause(750)
     }
 }
 // Change the Y - Coordinate of the bullet to simulate a shoot Animation
@@ -49,8 +50,8 @@ function shoot () {
     // music.playMelody("C5 B A G F F F F ", 5000)
     for (let index = 0; index < 4; index++) {
         bullet.change(LedSpriteProperty.Y, -1)
-        // bullet.setBrightness(80)
-        basic.pause(100)
+        bullet.setBrightness(80)
+basic.pause(100)
     }
     shootColdown = false
 }
@@ -111,9 +112,9 @@ function setEnemyPosition (randomNumber: number) {
 let randomNumberForEnemyPosition = 0
 let enemy: game.LedSprite = null
 let shootColdown = false
-let bullet: game.LedSprite = null
 let player: game.LedSprite = null
 let health = 0
+let bullet: game.LedSprite = null
 health = 5
 // Create Player
 player = game.createSprite(2, 4)
