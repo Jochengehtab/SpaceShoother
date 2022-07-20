@@ -2,6 +2,7 @@
 input.onButtonPressed(Button.A, function () {
     player.change(LedSpriteProperty.X, -1)
 })
+//Animation for the Super Attack
 function showSuperAttackAnimations () {
     game.pause()
     basic.showLeds(`
@@ -35,12 +36,14 @@ function showSuperAttackAnimations () {
     game.resume()
     basic.pause(500)
 }
+//Moves an Enemy
 function moveEnemy (sprite: game.LedSprite) {
     for (let index = 0; index < 4; index++) {
         sprite.change(LedSpriteProperty.Y, 1)
         basic.pause(1000)
     }
 }
+//Change the Y - Coordinate of the bullet to simulate a shoot Animation
 function shoot () {
     serial.writeLine("In function shoot()")
     bullet = game.createSprite(player.get(LedSpriteProperty.X), player.get(LedSpriteProperty.Y))
@@ -53,6 +56,7 @@ function shoot () {
     }
     shootColdown = false
 }
+//Lunch the SuperAttack
 function superAttack () {
     if (bullet == null) {
         return
@@ -88,16 +92,19 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     player.change(LedSpriteProperty.X, 1)
 })
+//Moves a Sprite
 function move (toMoveSprite: game.LedSprite) {
     for (let index = 0; index < 4; index++) {
         toMoveSprite.change(LedSpriteProperty.Y, -1)
         basic.pause(100)
     }
 }
+//Sets the Position of an Enemy
 function setEnemyPosition (randomNumber: number) {
     enemy = game.createSprite(randomNumber, -1)
     moveEnemy(enemy)
 }
+//Create other values
 let randomNumberForEnemyPosition = 0
 let enemy: game.LedSprite = null
 let shootColdown = false
@@ -107,6 +114,19 @@ let player: game.LedSprite = null
 player = game.createSprite(2, 4)
 // Log
 serial.writeLine("Start Log for Game 'Space Shoother'")
+// Forever function for spawning Enemys with a random Position
+basic.forever(function () {
+    randomNumberForEnemyPosition = randint(0, 4)
+    setEnemyPosition(randomNumberForEnemyPosition)
+})
+basic.forever(function () {
+    if (bullet == null) {
+        return
+    }
+    if (bullet.get(LedSpriteProperty.Y) == 0) {
+        bullet.delete()
+    }
+})
 basic.forever(function () {
     if (enemy == null) {
         return
@@ -125,20 +145,6 @@ basic.forever(function () {
     }
     if (enemy.get(LedSpriteProperty.Y) == 4) {
         enemy.delete()
-        music.playMelody("C C C F E D C C ", 6000)
         shootColdown = false
-    }
-})
-// Forever function for spawning Enemys with a random Position
-basic.forever(function () {
-    randomNumberForEnemyPosition = randint(0, 4)
-    setEnemyPosition(randomNumberForEnemyPosition)
-})
-basic.forever(function () {
-    if (bullet == null) {
-        return
-    }
-    if (bullet.get(LedSpriteProperty.Y) == 0) {
-        bullet.delete()
     }
 })
