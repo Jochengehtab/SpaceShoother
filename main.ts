@@ -5,19 +5,14 @@ input.onButtonPressed(Button.A, function () {
 // Animation for the Super Attack
 function showSuperAttackAnimations () {
     game.pause()
-    fakePlayer = game.createSprite(player.get(LedSpriteProperty.X), 4)
-    led.setBrightness(100)
-    fakePlayer.setBrightness(255)
     basic.showLeds(`
-        . . . . .
         . . . . .
         . . . . .
         . . # . .
         . . . . .
+        . . . . .
         `)
     basic.clearScreen()
-    led.setBrightness(100)
-    fakePlayer.setBrightness(255)
     basic.showLeds(`
         . . . . .
         . . . . .
@@ -26,8 +21,6 @@ function showSuperAttackAnimations () {
         . . . . .
         `)
     basic.clearScreen()
-    led.setBrightness(100)
-    fakePlayer.setBrightness(255)
     basic.showLeds(`
         . . . . .
         # # . # #
@@ -36,8 +29,6 @@ function showSuperAttackAnimations () {
         . . . . .
         `)
     basic.clearScreen()
-    led.setBrightness(100)
-    fakePlayer.setBrightness(255)
     basic.showLeds(`
         # # # # #
         # # # # #
@@ -45,8 +36,6 @@ function showSuperAttackAnimations () {
         . . # . .
         . . . . .
         `)
-    fakePlayer.delete()
-    led.setBrightness(255)
     wait(300)
     game.resume()
 }
@@ -132,9 +121,8 @@ let score = 0
 let enemy: game.LedSprite = null
 let shootColdown = false
 let player: game.LedSprite = null
-let fakePlayer: game.LedSprite = null
-let health = 0
 let bullet: game.LedSprite = null
+let health = 0
 health = 5
 // Create Player
 player = game.createSprite(2, 4)
