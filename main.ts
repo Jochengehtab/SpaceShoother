@@ -119,16 +119,10 @@ health = 5
 player = game.createSprite(2, 4)
 // Startlog
 serial.writeLine("Start Log for Game 'Space Shoother'.")
+// Check health
 basic.forever(function () {
-    if (enemy == null) {
-        return
-    } else if (bullet == null) {
-        return
-    }
-    if (bullet.isTouching(enemy)) {
-        bullet.delete()
-        enemy.delete()
-        music.playMelody("C C D C C C D C ", 4500)
+    if (health == 0) {
+        game.pause()
     }
 })
 // Delete enemy wenn his Y - Coordinate is '4'
@@ -136,22 +130,24 @@ basic.forever(function () {
     if (enemy == null) {
         return
     }
-    if(enemy.isTouchingEdge() == false){
+    if (health == 0) {
         return
     }
-    serial.writeLine("" + (enemy.get(LedSpriteProperty.Y)))
-    if (enemy.get(LedSpriteProperty.Y) < 4) {
+    if (enemy.isTouchingEdge() == false) {
         return
     }
     if (enemy.get(LedSpriteProperty.Y) == 4) {
         enemy.delete()
-        setHealth(health = health - 1)
+        setHealth(health -= 1)
         basic.showNumber(health)
         shootColdown = false
     }
 })
 // Forever function for spawning Enemys with a random Position
 basic.forever(function () {
+    if (health == 0) {
+        return
+    }
     setEnemyPosition(randomNumberForEnemyPosition)
     randomNumberForEnemyPosition = randint(0, 4)
 })
@@ -160,8 +156,26 @@ basic.forever(function () {
     if (bullet == null) {
         return
     }
+    if (health == 0) {
+        return
+    }
     if (bullet.get(LedSpriteProperty.Y) == 0) {
         bullet.delete()
         shootColdown = false
+    }
+})
+basic.forever(function () {
+    if (enemy == null) {
+        return
+    } else if (bullet == null) {
+        return
+    }
+    if (health == 0) {
+        return
+    }
+    if (bullet.isTouching(enemy)) {
+        bullet.delete()
+        enemy.delete()
+        music.playMelody("C C D C C C D C ", 4500)
     }
 })
