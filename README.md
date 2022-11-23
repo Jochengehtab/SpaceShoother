@@ -1,18 +1,16 @@
 
-> Open this Site: [https://jochengehtab.github.io/spaceshoother/](https://jochengehtab.github.io/spaceshoother/) 
-
 ## Use it by yourself
 ## Author: Jochengehtab
 
 Dieses Repository ist ein **Vollständiges** Spiel
 
-## Anleitung
+## Instructions
 - Open [https://makecode.microbit.org/](https://makecode.microbit.org/)
 - Klick on **Neues Project**
 - Klick on **Advanced** under the Circle Menu
 - And rhen Paste this Link: **https://github.com/jochengehtab/spaceshoother**
 
-## Blockvorschau
+## Block preview
 
 That are the Blocks:
 
