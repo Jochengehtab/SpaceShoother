@@ -1,21 +1,20 @@
 
-> Diese Seite bei [https://jochengehtab.github.io/spaceshoother/](https://jochengehtab.github.io/spaceshoother/) öffnen
+> Open this Site: [https://jochengehtab.github.io/spaceshoother/](https://jochengehtab.github.io/spaceshoother/) 
 
-## Als Erweiterung verwenden
+## Use it by yourself
 ## Author: Jochengehtab
 
 Dieses Repository ist ein **Vollständiges** Spiel
 
 ## Anleitung
-- Öffne [https://makecode.microbit.org/](https://makecode.microbit.org/)
-- Klicke auf **Neues Projekt**
-- Klicke auf **Erweiterungen** unter dem Zahnrad-Menü
-- Nach **https://github.com/jochengehtab/spaceshoother** suchen und dann dieses Repository importieren
+- Open [https://makecode.microbit.org/](https://makecode.microbit.org/)
+- Klick on **Neues Project**
+- Klick on **Advanced** under the Circle Menu
+- And rhen Paste this Link: **https://github.com/jochengehtab/spaceshoother**
 
 ## Blockvorschau
 
-Dieses Bild zeigt den Blockcode vom letzten Commit im Master an.
-Die Aktualisierung dieses Bildes kann einige Minuten dauern.
+That are the Blocks:
 
 ![Eine gerenderte Ansicht der Blöcke](https://github.com/jochengehtab/spaceshoother/raw/master/.github/makecode/blocks.png)
 
