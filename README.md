@@ -1,5 +1,6 @@
 
 ## Use it by yourself
+Include it in your Micor:Bit code
 ## Author: Jochengehtab
 
 Dieses Repository ist ein **Vollständiges** Spiel
